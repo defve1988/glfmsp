@@ -11,28 +11,22 @@ const routes = [
     meta: { title: 'Home Page' }
   },
   {
-    path: '/measurements',
-    name: 'Measurements',
-    component: () => import('@/views/Measurements'),
-    meta: { title: 'Measurements' }
+    path: '/chemicals',
+    name: 'Chemicals',
+    component: () => import('@/views/Chemicals'),
+    meta: { title: 'Chemicals' }
   },
   {
-    path: '/bioaccumulations',
-    name: 'Bioaccumulations',
-    component: () => import('@/views/Bioaccumulations'),
-    meta: { title: 'Bioaccumulations' }
+    path: '/data_viz',
+    name: 'DataViz',
+    component: () => import('@/views/DataViz'),
+    meta: { title: 'DataViz' }
   },
   {
-    path: '/trends',
-    name: 'Trends',
-    component: () => import('@/views/Trends'),
-    meta: { title: 'Trends' }
-  },
-  {
-    path: '/risks',
-    name: 'Risks',
-    component: () => import('@/views/Risks'),
-    meta: { title: 'Risks' }
+    path: '/tools',
+    name: 'Tools',
+    component: () => import('@/views/Tools'),
+    meta: { title: 'Tools' }
   },
   {
     path: '/group',

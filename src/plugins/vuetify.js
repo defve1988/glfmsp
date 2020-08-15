@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
+import GL_icon from "@/components/widgets/GL_icon";
 
 Vue.use(Vuetify);
 
@@ -21,4 +22,12 @@ export default new Vuetify({
           },
         },
       },
+      icons: {
+        values: {
+          GL_icon: { // name of our custom icon
+            component: GL_icon, // our custom component
+          },
+        },
+      },
 });
+
