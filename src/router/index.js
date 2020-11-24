@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('@/views/Home'),
-    meta: { title: 'Home Page' }
+    meta: { title: 'GLFMSP Visualization Project' }
   },
   {
     path: '/chemicals',

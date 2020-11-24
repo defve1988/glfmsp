@@ -1,32 +1,6 @@
 // set and change apis for different pages
+
 const state = {
-    lake_selected: 0,
-    // seleceted_lake_text: 'Great Lakes',
-    // site location adjustment (50, -100)
-    // less industrial
-    lakes_data: [
-        { key: "GL", name: "Great Lakes", d: "", x: "", y: "", less_industrial: "All Less-industrial Sites", industrial: "All Industrial Sites" },
-        { key: "LS", name: "Lake Superior", d: "LS", x: 280, y: 180, less_industrial: "Keweenaw Point", industrial: "Apostle Islands" },
-        { key: "LM", name: "Lake Michigan", d: "LM", x: 370, y: 420, less_industrial: "Sturgeon Bay", industrial: "Saugatuck" },
-        { key: "LH", name: "Lake Huron", d: "LH", x: 630, y: 500, less_industrial: "Rockport", industrial: "Port Austin" },
-        { key: "LE", name: "Lake Erie", d: "LE", x: 720, y: 720, less_industrial: "Dunkirk", industrial: "Middle Bass Island" },
-        { key: "LO", name: "Lake Ontario", d: "LO", x: 940, y: 590, less_industrial: "Oswego", industrial: "North Hamlin" },
-    ],
-
-    site_data: [
-        { key: "LS1", lake: "LS", class: "less_industrial_site", x: (3304 + 50) * 0.1, y: -(5886 - 100) * 0.1 + 800, name: "Keweenaw Point" },
-        { key: "LM1", lake: "LM", class: "less_industrial_site", x: (3454 + 50) * 0.1, y: -(3596 - 100) * 0.1 + 800, name: "Sturgeon Bay" },
-        { key: "LH1", lake: "LH", class: "less_industrial_site", x: (6144 + 50) * 0.1, y: -(3596 - 100) * 0.1 + 800, name: "Rockport" },
-        { key: "LE1", lake: "LE", class: "less_industrial_site", x: (8734 + 50) * 0.1, y: -(1236 - 100) * 0.1 + 800, name: "Dunkirk" },
-        { key: "LO1", lake: "LO", class: "less_industrial_site", x: (10764 + 50) * 0.1, y: -(2176 - 100) * 0.1 + 800, name: "Oswego" },
-
-        { key: "LS2", lake: "LS", class: "more_industrial_site", x: (1254 + 50) * 0.1, y: -(5456 - 100) * 0.1 + 800, name: "Apostle Islands" },
-        { key: "LM2", lake: "LM", class: "more_industrial_site", x: (4104 + 50) * 0.1, y: -(1236 - 100) * 0.1 + 800, name: "Saugatuck" },
-        { key: "LH2", lake: "LH", class: "more_industrial_site", x: (6484 + 50) * 0.1, y: -(2656 - 100) * 0.1 + 800, name: "Port Austin" },
-        { key: "LE2", lake: "LE", class: "more_industrial_site", x: (6544 + 50) * 0.1, y: -(426 - 100) * 0.1 + 800, name: "Middle Bass Island" },
-        { key: "LO2", lake: "LO", class: "more_industrial_site", x: (9764 + 50) * 0.1, y: -(2026 - 100) * 0.1 + 800, name: "North Hamlin" },
-    ],
-
     LS: "M3665 7103 c-132 -29 -202 -35 -350 -29 -82 3 -163 8 -180 12 -42 8" +
         " -105 -23 -105 -51 0 -14 -10 -26 -27 -34 -16 -7 -59 -33 -97 -59 -51 -35 -74" +
         " -59 -92 -94 -20 -39 -35 -53 -82 -77 -31 -16 -75 -48 -97 -70 -34 -36 -44 -41" +
@@ -167,6 +141,60 @@ const state = {
         " 107 71 65 213 137 449 227 316 119 831 393 920 490 17 17 60 47 97 66 59 30" +
         " 71 41 100 92 24 45 46 68 90 97 32 20 60 41 63 45 3 4 -3 30 -13 57 l-17 50" +
         " -45 -20z",
+    prev_filter: [],
+    update: true,
+    last_clicked: null,
+    title_text: "Laurentian Great Lakes",
+    // state 1: nothing hovered:
+    // display selected data
+    // initially all lake selected
+    selected: {
+        index: [],
+        text: "Laurentian Great Lakes"
+    },
+    // state 2: something is hovered:
+    hovered: {
+        index: []
+    },
+
+    // seleceted_lake_text: 'Great Lakes',
+    // site location adjustment (50, -100)
+    // less industrial
+    lakes_data: {
+        // GL: { selected: false,lake: "GL", name: "Laurentian Great Lakes", d: "", x: "", y: "", less_industrial: "All Less-industrial Sites", industrial: "All Industrial Sites" },
+        LS: { selected: false, lake: "LS", name: "Lake Superior", d: "LS", x: 280, y: 180, less_industrial: "Keweenaw Point", industrial: "Apostle Islands" },
+        LM: { selected: false, lake: "LM", name: "Lake Michigan", d: "LM", x: 370, y: 420, less_industrial: "Sturgeon Bay", industrial: "Saugatuck" },
+        LH: { selected: false, lake: "LH", name: "Lake Huron", d: "LH", x: 630, y: 500, less_industrial: "Rockport", industrial: "Port Austin" },
+        LO: { selected: false, lake: "LO", name: "Lake Ontario", d: "LO", x: 940, y: 590, less_industrial: "Oswego", industrial: "North Hamlin" },
+        LE: { selected: false, lake: "LE", name: "Lake Erie", d: "LE", x: 720, y: 720, less_industrial: "Dunkirk", industrial: "Middle Bass Island" },
+    },
+
+    site_data: {
+        LS1: { hovered: false, selected: false, lake: "LS1", class: "less_industrial_site", x: (3304 + 50) * 0.1, y: -(5886 - 100) * 0.1 + 800, name: "Keweenaw Point" },
+        LM1: { hovered: false, selected: false, lake: "LM1", class: "less_industrial_site", x: (3454 + 50) * 0.1, y: -(3596 - 100) * 0.1 + 800, name: "Sturgeon Bay" },
+        LH1: { hovered: false, selected: false, lake: "LH1", class: "less_industrial_site", x: (6144 + 50) * 0.1, y: -(3596 - 100) * 0.1 + 800, name: "Rockport" },
+        LE1: { hovered: false, selected: false, lake: "LE1", class: "less_industrial_site", x: (8734 + 50) * 0.1, y: -(1236 - 100) * 0.1 + 800, name: "Dunkirk" },
+        LO1: { hovered: false, selected: false, lake: "LO1", class: "less_industrial_site", x: (10764 + 50) * 0.1, y: -(2176 - 100) * 0.1 + 800, name: "Oswego" },
+
+        LS2: { hovered: false, selected: false, lake: "LS2", class: "more_industrial_site", x: (1254 + 50) * 0.1, y: -(5456 - 100) * 0.1 + 800, name: "Apostle Islands" },
+        LM2: { hovered: false, selected: false, lake: "LM2", class: "more_industrial_site", x: (4104 + 50) * 0.1, y: -(1236 - 100) * 0.1 + 800, name: "Saugatuck" },
+        LH2: { hovered: false, selected: false, lake: "LH2", class: "more_industrial_site", x: (6484 + 50) * 0.1, y: -(2656 - 100) * 0.1 + 800, name: "Port Austin" },
+        LE2: { hovered: false, selected: false, lake: "LE2", class: "more_industrial_site", x: (6544 + 50) * 0.1, y: -(426 - 100) * 0.1 + 800, name: "Middle Bass Island" },
+        LO2: { hovered: false, selected: false, lake: "LO2", class: "more_industrial_site", x: (9764 + 50) * 0.1, y: -(2026 - 100) * 0.1 + 800, name: "North Hamlin" },
+    },
+    // title_text_temp:"",
+    // site_temp: {
+    //     LS1: { hovered: false, selected: false },
+    //     LM1: { hovered: false, selected: false },
+    //     LH1: { hovered: false, selected: false },
+    //     LE1: { hovered: false, selected: false },
+    //     LO1: { hovered: false, selected: false },
+    //     LS2: { hovered: false, selected: false },
+    //     LM2: { hovered: false, selected: false },
+    //     LH2: { hovered: false, selected: false },
+    //     LE2: { hovered: false, selected: false },
+    //     LO2: { hovered: false, selected: false },
+    // }
 
 };
 
@@ -183,6 +211,111 @@ const mutations = {
         // state.lake_selected[index] = !state.lake_selected[index];
         state.lake_selected = index;
     },
+    CHANGE_SELECTED_TEXT: (state) => {
+        var title = "Laurentian Great Lakes"
+        var index = []
+        for (const [key, value] of Object.entries(state.site_data)) {
+            if (value.selected) index.push(key)
+        }
+        var LS = ["LS1", "LS2"]
+        var LM = ["LM1", "LM2"]
+        var LH = ["LH1", "LH2"]
+        var LO = ["LO1", "LO2"]
+        var LE = ["LE1", "LE2"]
+        var lower_industrial = ["LO2", "LE2"]
+        var lower_non_industrial = ["LO1", "LE1"]
+
+        var upper_industrial = ["LS2", "LM2", "LH2"]
+        var upper_non_industrial = ["LS1", "LM1", "LH1"]
+
+        var lower_lakes = ["LO1", "LO2", "LE1", "LE2"]
+
+        var all_industrial = ["LS2", "LM2", "LH2", "LO2", "LE2"]
+        var all_non_industrial = ["LS1", "LM1", "LH1", "LO1", "LE1"]
+
+        var upper_lakes = ["LS1", "LS2", "LM1", "LM2", "LH1", "LH2"]
+
+        state.lakes_data["LS"].selected = false
+        state.lakes_data["LH"].selected = false
+        state.lakes_data["LM"].selected = false
+        state.lakes_data["LE"].selected = false
+        state.lakes_data["LO"].selected = false
+        if (LS.every((val) => index.includes(val))) state.lakes_data["LS"].selected = true
+        if (LM.every((val) => index.includes(val))) state.lakes_data["LM"].selected = true
+        if (LH.every((val) => index.includes(val))) state.lakes_data["LH"].selected = true
+        if (LO.every((val) => index.includes(val))) state.lakes_data["LO"].selected = true
+        if (LE.every((val) => index.includes(val))) state.lakes_data["LE"].selected = true
+        console.log(state.site_data)
+        if (index.length == 1) {
+            title = state.site_data[index[0]].name
+        }
+        else if (index.length == 2) {
+            if (LS.every((val) => index.includes(val))) {
+                title = "Lake Superior"
+            }
+            if (LM.every((val) => index.includes(val))) {
+                title = "Lake Michigan"
+            }
+            if (LH.every((val) => index.includes(val))) {
+                title = "Lake Huron"
+            }
+            if (LO.every((val) => index.includes(val))) {
+                title = "Lake Ontario"
+            }
+            if (LE.every((val) => index.includes(val))) {
+                title = "Lake Erie"
+                state.lakes_data["LE"].selected = true
+            }
+            if (lower_industrial.every((val) => index.includes(val))) {
+                title = "Lower Lakes (more industrial)"
+            }
+            if (lower_non_industrial.every((val) => index.includes(val))) {
+                title = "Lower Lakes (less industrial)"
+            }
+        }
+        else if (index.length == 3) {
+            if (upper_industrial.every((val) => index.includes(val))) title = "Upper Lakes (more industrial)"
+            if (upper_non_industrial.every((val) => index.includes(val))) title = "Upper Lakes (less industrial)"
+        }
+        else if (index.length == 4) {
+            if (lower_lakes.every((val) => index.includes(val))) {
+                title = "Lower Lakes"
+            }
+        }
+        else if (index.length == 5) {
+            if (all_industrial.every((val) => index.includes(val))) title = "All Industrial Sites"
+            if (all_non_industrial.every((val) => index.includes(val))) title = "All None-industrial Sites"
+        }
+        else if (index.length == 6) {
+            if (upper_lakes.every((val) => index.includes(val))) {
+                title = "Upper Lakes"
+            }
+        }
+
+        state.selected.text = title
+        state.selected.index = index
+    },
+    CHANGE_FILTER(state) {
+        var site_filter_selected = [];
+        for (const [, value] of Object.entries(state.site_data)) {
+            if (value.selected) site_filter_selected.push(value.name);
+        }
+        if (site_filter_selected.length == 0) {
+            site_filter_selected = [
+                "Keweenaw Point",
+                "Sturgeon Bay",
+                "Rockport",
+                "Dunkirk",
+                "Oswego",
+                "Apostle Islands",
+                "Saugatuck",
+                "Port Austin",
+                "Middle Bass Island",
+                "North Hamlin",
+            ];
+        }
+        state.prev_filter = site_filter_selected;
+    }
 };
 
 export default {
