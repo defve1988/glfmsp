@@ -8,7 +8,7 @@
     mini-variant-width="75"
   >
     <v-list dense>
-      <template v-for="(item, i) in NavBar.items">
+      <template v-for="(item, i) in theme.nav_items">
         <v-divider v-if="item.divider" :key="i" dark class="my-4" />
         <v-list-item v-else :key="i" :color="item.color" link router :to="item.route">
           <v-tooltip right>
@@ -39,7 +39,6 @@ export default {
   computed: {
     ...mapState({
       theme: "theme",
-      NavBar: "nav_bar_item"
     })
   },
   data: () => ({})
