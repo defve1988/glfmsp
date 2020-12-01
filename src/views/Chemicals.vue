@@ -1,5 +1,11 @@
 <template>
-  <v-tabs v-model="active" color="success" dark slider-color="success">
+  <v-tabs
+    v-model="active"
+    color="success"
+    dark
+    slider-color="success"
+    :height="!theme.Scrolled ? 30 : 0"
+  >
     <v-tab ripple>Overview</v-tab>
     <v-tab ripple>Mercury</v-tab>
     <v-tab ripple>PCBs</v-tab>
@@ -14,6 +20,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Home",
   props: [],
@@ -23,6 +30,11 @@ export default {
   }),
   mounted() {},
   methods: {},
-  computed: {},
+  computed: {
+    ...mapState({
+      app_data: "app_data",
+      theme: "theme",
+    }),
+  },
 };
 </script>

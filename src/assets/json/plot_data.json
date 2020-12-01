@@ -1,0 +1,217 @@
+[
+    {
+        "index": 0, "name": "Mercury",
+        "plots": {
+            "type": "box",
+            "x": "Year",
+            "y": ["Mercury"],
+            "x_title": "Year",
+            "y_title": "conc (ng/g wet)"
+        }
+    },
+    {
+        "index": 1, "name": "Total PCBs",
+        "plots": {
+            "type": "box",
+            "x": "Year",
+            "y": ["Total PCBs"],
+            "x_title": "Year",
+            "y_title": "conc (ng/g wet)"
+        }
+    },
+    {
+        "index": 2, "name": "Total DDTs",
+        "plots": {
+            "type": "box",
+            "x": "Year",
+            "y": ["Total DDTs"],
+            "x_title": "Year",
+            "y_title": "conc (ng/g wet)"
+        }
+    },
+    {
+        "index": 3, "name": "Major PBDEs",
+        "plots": {
+            "type": "box",
+            "x": "Year",
+            "y": ["Major PBDEs"],
+            "x_title": "Year",
+            "y_title": "conc (ng/g wet)"
+        }
+    },
+    {
+        "index": 4, "name": "Pesticides",
+        "plots": {
+            "type": "box",
+            "x": "Year",
+            "y": ["Pesticides"],
+            "x_title": "Year",
+            "y_title": "conc (ng/g wet)"
+        }
+    },
+    {
+        "index": 5, "name": "Others",
+        "plots": {
+            "type": "box",
+            "x": "Year",
+            "y": ["Others"],
+            "x_title": "Year",
+            "y_title": "conc (ng/g wet)"
+        }
+    },
+
+    {
+        "index": 6, "name": "Fish Age",
+        "plots": {
+            "type": "box",
+            "x": "Year",
+            "y": ["Age"],
+            "x_title": "Year",
+            "y_title": "Age"
+        }
+    },
+    {
+        "index": 7, "name": "Fish Lipid",
+        "plots": {
+            "type": "box",
+            "x": "Year",
+            "y": ["Lipid"],
+            "x_title": "Year",
+            "y_title": "Lipid (%)"
+        }
+    },
+
+    {
+        "index": 8, "name": "Chemical Histogram",
+        "plots": {
+            "type": "hist",
+            "y": ["Mercury", "Total PCBs", "Total DDTs", "Major PBDEs", "Pesticides"],
+            "x_title": "conc (ng/g wet)",
+            "y_title": "Counts"
+        }
+    },
+    {
+        "index": 9, "name": "Fish Age Histogram",
+        "plots": {
+            "type": "hist",
+            "y": ["Age"],
+            "x_title": "Agr",
+            "y_title": "Counts"
+        }
+    },
+    {
+        "index": 10, "name": "Fish Lipid Histogram",
+        "plots": {
+            "type": "hist",
+            "y": ["Lipid"],
+            "x_title": "Lipid (%)",
+            "y_title": "Counts",
+            "filter": [
+                { "name": "Lake Trout", "col": "Fish", "eval": "=='Lake Trout'" },
+                { "name": "Walleye", "col": "Fish", "eval": "=='Walleye'" }
+            ]
+        }
+    },
+
+    {
+        "index": 11, "name": "Chemical Ratios",
+        "plots": {
+            "type": "pie",
+            "y": ["Mercury", "Total PCBs", "Total DDTs", "Major PBDEs", "Pesticides", "Others"],
+            "x_title": "",
+            "y_title": ""
+        }
+    },
+
+    {
+        "index": 12, "name": "Age vs. Mercury",
+        "plots": {
+            "type": "scatter",
+            "x": "Age",
+            "y": ["Mercury"],
+            "x_title": "Age",
+            "y_title": "conc (ng/g wet)",
+            "filter": [
+                { "name": "Before 2010", "col": "Year", "eval": "<=2010" },
+                { "name": "After 2010", "col": "Year", "eval": ">2010" }
+            ]
+        }
+    },
+    {
+        "index": 13, "name": "Age vs. Total PCBs",
+        "plots": {
+            "type": "scatter",
+            "x": "Age",
+            "y": ["Total PCBs"],
+            "x_title": "Age",
+            "y_title": "conc (ng/g wet)",
+            "filter": [
+                { "name": "Before 2010", "col": "Year", "eval": "<=2010" },
+                { "name": "After 2010", "col": "Year", "eval": ">2010" }
+            ]
+        }
+    },
+    {
+        "index": 14, "name": "Age vs. Total DDTs",
+        "plots": {
+            "type": "scatter",
+            "x": "Age",
+            "y": ["Total DDTs"],
+            "x_title": "Age",
+            "y_title": "conc (ng/g wet)",
+            "filter": [
+                { "name": "Before 2010", "col": "Year", "eval": "<=2010" },
+                { "name": "After 2010", "col": "Year", "eval": ">2010" }
+            ]
+        }
+    },
+    {
+        "index": 15, "name": "Age vs. Major PBDEs",
+        "plots": {
+            "type": "scatter",
+            "x": "Age",
+            "y": ["Major PBDEs"],
+            "x_title": "Age",
+            "y_title": "conc (ng/g wet)",
+            "filter": [
+                { "name": "Before 2010", "col": "Year", "eval": "<=2010" },
+                { "name": "After 2010", "col": "Year", "eval": ">2010" }
+            ]
+        }
+    },
+    {
+        "index": 16, "name": "Age vs. Pesticides",
+        "plots": {
+            "type": "scatter",
+            "x": "Age",
+            "y": ["Pesticides"],
+            "x_title": "Age",
+            "y_title": "conc (ng/g wet)",
+            "filter": [
+                { "name": "Before 2010", "col": "Year", "eval": "<=2010" },
+                { "name": "After 2010", "col": "Year", "eval": ">2010" }
+            ]
+        }
+    },
+
+    {
+        "index": 17, "name": "Chemicals of Sites",
+        "plots": {
+            "type": "bar_stacked",
+            "x": "Site",
+            "y": ["Mercury", "Total PCBs", "Total DDTs", "Major PBDEs", "Pesticides"],
+            "x_title": "",
+            "y_title": "conc (ng/g wet)"
+        }
+    },
+    {
+        "index": 18, "name": "Chemicals Trends",
+        "plots": {
+            "type": "bar_stacked",
+            "x": "Year",
+            "y": ["Mercury", "Total PCBs", "Total DDTs", "Major PBDEs", "Pesticides"],
+            "x_title": "Year",
+            "y_title": "conc (ng/g wet)"
+        }
+    }
+]

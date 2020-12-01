@@ -8,6 +8,11 @@
         viewBox="-25 25 1250 500"
         preserveAspectRatio="xMinYMin meet"
       >
+        <filter id="f1" x="0" y="0" width="200%" height="200%">
+          <feOffset result="offOut" in="SourceAlpha" dx="10" dy="10" />
+          <feGaussianBlur result="blurOut" in="offOut" stdDeviation="8" />
+          <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+        </filter>
         <!-- plot lakes -->
         <g
           v-for="(lake, index) in lakes.lakes_data"
@@ -17,6 +22,7 @@
           @click="lake_click"
           @mouseover="lake_mouseover"
           @mouseleave="lake_mouseleave"
+          :filter="lake.selected || lake.hovered ? 'url(#f1)' : ''"
         >
           <g transform="translate(0,800) scale(0.1,-0.1)" :class="lake.lake">
             <path
@@ -114,7 +120,7 @@ export default {
   mounted() {
     // this.last_hover = new Date();
     this.CHANGE_FILTER();
-    this.CHANGE_PLOT_DATA(this.lakes.prev_filter)
+    // this.CHANGE_PLOT_DATA(this.lakes.prev_filter);
   },
   computed: {
     ...mapState({
@@ -123,7 +129,12 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(["CHANGE_SELECTED_TEXT","CHANGE_FILTER","CHANGE_PLOT_DATA"]),
+    ...mapMutations([
+      "CHANGE_SELECTED_TEXT",
+      "CHANGE_FILTER",
+      // "CHANGE_PLOT_DATA",
+      "FILTER_DF"
+    ]),
     legend_click(e) {
       let el = e.currentTarget.getAttribute("class");
       var isALLSelected = true;
@@ -176,13 +187,14 @@ export default {
       this.lakes.site_data["LE2"].hovered = false;
       this.CHANGE_SELECTED_TEXT();
       this.CHANGE_FILTER();
-      this.CHANGE_PLOT_DATA(this.lakes.prev_filter)
+      this.FILTER_DF(this.lakes.prev_filter)
+      // this.CHANGE_PLOT_DATA(this.lakes.prev_filter);
       this.lakes.title_text = this.lakes.selected.text;
     },
     lake_click(e) {
       let el = e.currentTarget.getAttribute("name"); // this name is related with g, not the data, the same of others
       var lake_index = this.lakes.lakes_data[el].lake;
-      console.log(this.lakes.lakes_data);
+      // console.log(this.lakes.lakes_data);
       if (this.lakes.lakes_data[el].selected) {
         this.lakes.lakes_data[el].selected = false;
         this.lakes.site_data[lake_index + "1"].selected = false;
@@ -196,7 +208,8 @@ export default {
       this.lakes.site_data[el + "2"].hovered = false;
       this.CHANGE_SELECTED_TEXT();
       this.CHANGE_FILTER();
-      this.CHANGE_PLOT_DATA(this.lakes.prev_filter)
+      this.FILTER_DF(this.lakes.prev_filter)
+      // this.CHANGE_PLOT_DATA(this.lakes.prev_filter);
       this.lakes.title_text = this.lakes.selected.text;
     },
     site_click(e) {
@@ -217,7 +230,8 @@ export default {
       this.lakes.site_data[el].hovered = false;
       this.CHANGE_SELECTED_TEXT();
       this.CHANGE_FILTER();
-      this.CHANGE_PLOT_DATA(this.lakes.prev_filter)
+      this.FILTER_DF(this.lakes.prev_filter)
+      // this.CHANGE_PLOT_DATA(this.lakes.prev_filter);
       this.lakes.title_text = this.lakes.selected.text;
     },
 
@@ -263,6 +277,7 @@ export default {
 
     lake_mouseover(e) {
       let el = e.currentTarget.getAttribute("name");
+      this.lakes.lakes_data[el].hovered = true;
       this.lakes.title_text = this.lakes.lakes_data[el].name;
       this.lakes.site_data[el + "1"].hovered = true;
       this.lakes.site_data[el + "2"].hovered = true;
@@ -287,6 +302,7 @@ export default {
     lake_mouseleave(e) {
       // this.last_hover = new Date();
       let el = e.currentTarget.getAttribute("name");
+      this.lakes.lakes_data[el].hovered = false;
       this.lakes.title_text = this.lakes.selected.text;
       this.lakes.site_data[el + "1"].hovered = false;
       this.lakes.site_data[el + "2"].hovered = false;
@@ -407,6 +423,9 @@ export default {
   transition-duration: 0.2s;
 }
 
+/* .GL_lakes:hover {
+  filter:url(#f1)
+} */
 .GL_lakes .lake_water {
   fill: rgb(4, 84, 212);
   opacity: 0.7;

@@ -6,7 +6,7 @@
 
 <script>
 import { mapState } from "vuex";
-import plot_site_map from "@/assets/plot_js/plot_site_map";
+import plot_site_map from "@/assets/js/plot_site_map";
 export default {
   name: "site_map",
   props: [],

@@ -162,11 +162,11 @@ const state = {
     // less industrial
     lakes_data: {
         // GL: { selected: false,lake: "GL", name: "Laurentian Great Lakes", d: "", x: "", y: "", less_industrial: "All Less-industrial Sites", industrial: "All Industrial Sites" },
-        LS: { selected: false, lake: "LS", name: "Lake Superior", d: "LS", x: 280, y: 180, less_industrial: "Keweenaw Point", industrial: "Apostle Islands" },
-        LM: { selected: false, lake: "LM", name: "Lake Michigan", d: "LM", x: 370, y: 420, less_industrial: "Sturgeon Bay", industrial: "Saugatuck" },
-        LH: { selected: false, lake: "LH", name: "Lake Huron", d: "LH", x: 630, y: 500, less_industrial: "Rockport", industrial: "Port Austin" },
-        LO: { selected: false, lake: "LO", name: "Lake Ontario", d: "LO", x: 940, y: 590, less_industrial: "Oswego", industrial: "North Hamlin" },
-        LE: { selected: false, lake: "LE", name: "Lake Erie", d: "LE", x: 720, y: 720, less_industrial: "Dunkirk", industrial: "Middle Bass Island" },
+        LS: { hovered: false, selected: false, lake: "LS", name: "Lake Superior", d: "LS", x: 280, y: 180, less_industrial: "Keweenaw Point", industrial: "Apostle Islands" },
+        LM: { hovered: false, selected: false, lake: "LM", name: "Lake Michigan", d: "LM", x: 370, y: 420, less_industrial: "Sturgeon Bay", industrial: "Saugatuck" },
+        LH: { hovered: false, selected: false, lake: "LH", name: "Lake Huron", d: "LH", x: 630, y: 500, less_industrial: "Rockport", industrial: "Port Austin" },
+        LO: { hovered: false, selected: false, lake: "LO", name: "Lake Ontario", d: "LO", x: 940, y: 590, less_industrial: "Oswego", industrial: "North Hamlin" },
+        LE: { hovered: false, selected: false, lake: "LE", name: "Lake Erie", d: "LE", x: 720, y: 720, less_industrial: "Dunkirk", industrial: "Middle Bass Island" },
     },
 
     site_data: {
@@ -245,7 +245,7 @@ const mutations = {
         if (LH.every((val) => index.includes(val))) state.lakes_data["LH"].selected = true
         if (LO.every((val) => index.includes(val))) state.lakes_data["LO"].selected = true
         if (LE.every((val) => index.includes(val))) state.lakes_data["LE"].selected = true
-        console.log(state.site_data)
+        // console.log(state.site_data)
         if (index.length == 1) {
             title = state.site_data[index[0]].name
         }

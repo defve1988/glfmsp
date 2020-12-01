@@ -19,34 +19,35 @@ export default {
     LeftBar: () => import("@/components/core/LeftBar"),
     Footer: () => import("@/components/core/Footer"),
   },
-  computed: {
-
-  },
+  computed: {},
   created() {
     // console.log(this.pageTitle)
     // document.title = this.pageTitle;
-    window.addEventListener('scroll', this.onScroll);
+    window.addEventListener("scroll", this.onScroll);
   },
   mounted() {},
-  methods:{
+  methods: {
     ...mapMutations(["CHANGE_SCROLLED"]),
-      onScroll(){
-        var scrolled = window.scrollY > 0;
-        this.CHANGE_SCROLLED(scrolled)
-        // console.log(this.NavBar.Scrolled)
+    onScroll() {
+      var scrolled = window.scrollY > 0;
+      this.CHANGE_SCROLLED(scrolled);
+      // console.log(this.NavBar.Scrolled)
     },
   },
   watch: {
     // NOTE: this will change the page title if the tilte is defined in router.meta, otherwise it will display the original title
     $route: {
       handler: (to, from) => {
-        document.title = to.meta.title || from.meta.title;
+        // first open, there is no from
+        if (from == undefined) {
+          document.title = to.meta.title;
+        } else {
+          document.title = to.meta.title || from.meta.title;
+        }
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
-  data: () => ({
-
-  })
+  data: () => ({}),
 };
 </script>

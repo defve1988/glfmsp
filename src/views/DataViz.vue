@@ -1,5 +1,11 @@
 <template>
-  <v-tabs v-model="active" color="success" dark slider-color="success">
+  <v-tabs
+    v-model="active"
+    color="success"
+    dark
+    slider-color="success"
+    :height="!theme.Scrolled ? 30 : 0"
+  >
     <v-tab ripple>Stats</v-tab>
     <v-tab ripple>Bioaccumulation</v-tab>
     <v-tab ripple>Trends</v-tab>
@@ -15,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "DataViz",
   props: [],
@@ -23,10 +30,12 @@ export default {
   },
   data: () => ({}),
   mounted() {},
-  methods: {
-
+  methods: {},
+  computed: {
+    ...mapState({
+      app_data: "app_data",
+      theme: "theme",
+    }),
   },
-  computed: {},
-
 };
 </script>
