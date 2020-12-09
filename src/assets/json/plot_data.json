@@ -95,7 +95,7 @@
         "plots": {
             "type": "hist",
             "y": ["Age"],
-            "x_title": "Agr",
+            "x_title": "Age",
             "y_title": "Counts"
         }
     },
